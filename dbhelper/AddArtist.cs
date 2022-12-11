@@ -18,7 +18,10 @@ namespace dbhelper
         string movementId;
         string aboutId;
         string countryId;
-        string CityId;
+        string cityId;
+
+        string abouttext;
+        string abouturl;
         NpgsqlConnection conn;
         NpgsqlCommand comm;
         NpgsqlDataReader dr;
@@ -28,10 +31,9 @@ namespace dbhelper
             load();
         }
 
+        //Interface methods
 
-
-
-        //Interface
+        //psql connection 
         public void load()
         {
             conn = new NpgsqlConnection("Server=localhost;Port=5432;Database=postgres;User Id=dbhelper; Password=123456;");
@@ -42,45 +44,81 @@ namespace dbhelper
             updateTable();
         }
 
-        public void deleteLastRow()
-        {
-            throw new NotImplementedException();
-        }
-
-
-
+        //insert  relevant data to related tables.
         public void addRowToTable()
         {
-            throw new NotImplementedException();
+            bool succesful = true;
+            try
+            {
+                //obtaining country id
+                conn.Open();
+                comm.CommandText = "(select country_id from adresses.cities where city_id=" + cityId + ");";
+                countryId = comm.ExecuteScalar().ToString();
+                conn.Close();
+
+                // insert into about.about
+                conn.Open();
+                comm.CommandText = "insert into about.about (about_name,about_who) values ('" + artistName + "','i');";
+                comm.ExecuteNonQuery();
+                conn.Close();
+
+                //obttaining about id
+                conn.Open();
+                comm.CommandText = "(select max(about_id) from about.about);";
+                aboutId = comm.ExecuteScalar().ToString();
+                conn.Close();
+
+                //insert into about_artist
+                conn.Open();
+                comm.CommandText = "insert into about.about_artist (about_id,about_text,about_img) values (" + aboutId + ",'" + abouttext + "','" + abouturl + "');";
+                comm.ExecuteNonQuery();
+                conn.Close();
+
+                //obtaining country id
+                conn.Open();
+                comm.CommandText = "(select country_id from adresses.cities where city_id=" + cityId + ");";
+                countryId = comm.ExecuteScalar().ToString();
+                conn.Close();
+
+                // insert into artists.artists
+                conn.Open();
+                comm.CommandText = "insert into artists.artists (artist_name,artist_movement_id,artist_about_id,artist_country_id,artist_city_id) values ('" + artistName + "','" + movementId + "','" + aboutId + "','" + countryId + "','" + cityId + "');";
+                comm.ExecuteNonQuery();
+                conn.Close();
+            }
+            catch (Exception e)
+            {
+                succesful = !succesful;
+                MessageBox.Show(e.Message.ToString());
+                conn.Close();
+            }
+            MessageBox.Show((succesful) ? "addition succesfull" : "unsuccesfull");
         }
 
+        //delete related rows from related tables.
+        public void deleteLastRow()
+        {
+            bool succesful = true;
+            try
+            {
+                conn.Open();
+                comm.CommandText = "delete from artists.artists where artist_id=(select max(artist_id) from artists.artists); delete from about.about where about_id=(select max(about_id) from about.about);";
+                comm.ExecuteNonQuery();
+                conn.Close();
+            }
+            catch (Exception e)
+            {
+                succesful = !succesful;
+                MessageBox.Show(e.Message.ToString());
+            }
+            MessageBox.Show((succesful) ? "deletion succesfull" : "unsuccesfull");
+        }
+
+        //update tables
         public void updateTable()
         {
             conn.Open();
-            comm.CommandType = CommandType.Text;
-            comm.CommandText = "select * from about.about where about_who='i';"; 
-            dr = comm.ExecuteReader();
-            if (dr.HasRows)
-            {
-                DataTable dt = new DataTable();
-                dt.Load(dr);
-                this.dgv_about.DataSource = dt;
-            }
-            conn.Close();
-
-            conn.Open();
-            comm.CommandText = "select * from adresses.countries";
-            dr = comm.ExecuteReader();
-            if (dr.HasRows)
-            {
-                DataTable dt = new DataTable();
-                dt.Load(dr);
-                this.dgv_country.DataSource = dt;
-            }
-            conn.Close();
-
-            conn.Open();
-            comm.CommandText = "select * from adresses.cities";
+            comm.CommandText = "select city_id,city from adresses.cities";
             dr = comm.ExecuteReader();
             if (dr.HasRows)
             {
@@ -91,7 +129,7 @@ namespace dbhelper
             conn.Close();
 
             conn.Open();
-            comm.CommandText = "select * from movements.movement";
+            comm.CommandText = "select movement_id,movement_name from movements.movement";
             dr = comm.ExecuteReader();
             if (dr.HasRows)
             {
@@ -116,12 +154,14 @@ namespace dbhelper
         //buttons
         private void Add_Click(object sender, EventArgs e)
         {
-
+            addRowToTable();
+            updateTable();
         }
 
         private void Delete_Click(object sender, EventArgs e)
         {
-
+            deleteLastRow();
+            updateTable();
         }
 
         //Input textfields
@@ -135,21 +175,19 @@ namespace dbhelper
             movementId = tb_movement_id.Text;
         }
 
-        private void tb_about_id_TextChanged(object sender, EventArgs e)
-        {
-            aboutId = tb_about_id.Text;
-        }
-
-        private void tb_country_id_TextChanged(object sender, EventArgs e)
-        {
-            countryId = tb_country_id.Text;
-        }
-
         private void tb_city_id_TextChanged(object sender, EventArgs e)
         {
-            CityId = tb_city_id.Text;
+            cityId = tb_city_id.Text;
         }
 
+        private void abouturlbox_TextChanged(object sender, EventArgs e)
+        {
+            abouturl = abouturlbox.Text;
+        }
 
+        private void abouttextbox_TextChanged(object sender, EventArgs e)
+        {
+            abouttext = abouttextbox.Text;
+        }
     }
 }

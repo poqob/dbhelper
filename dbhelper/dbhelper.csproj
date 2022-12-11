@@ -94,12 +94,6 @@
     <Reference Include="System.Xml" />
   </ItemGroup>
   <ItemGroup>
-    <Compile Include="AddAboutArtist.cs">
-      <SubType>Form</SubType>
-    </Compile>
-    <Compile Include="AddAboutArtist.Designer.cs">
-      <DependentUpon>AddAboutArtist.cs</DependentUpon>
-    </Compile>
     <Compile Include="AddArt.cs">
       <SubType>Form</SubType>
     </Compile>
@@ -133,9 +127,6 @@
     <Compile Include="Iconnection.cs" />
     <Compile Include="Program.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
-    <EmbeddedResource Include="AddAboutArtist.resx">
-      <DependentUpon>AddAboutArtist.cs</DependentUpon>
-    </EmbeddedResource>
     <EmbeddedResource Include="AddArt.resx">
       <DependentUpon>AddArt.cs</DependentUpon>
     </EmbeddedResource>
