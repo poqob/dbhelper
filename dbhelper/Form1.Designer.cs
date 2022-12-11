@@ -119,6 +119,7 @@ namespace dbhelper
             this.button2.Text = "add museum";
             this.button2.UseCompatibleTextRendering = true;
             this.button2.UseVisualStyleBackColor = false;
+            this.button2.Click += new System.EventHandler(this.add_museum_click);
             // 
             // Form1
             // 

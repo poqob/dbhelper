@@ -58,5 +58,11 @@ namespace dbhelper
             Form form = new AddAdress();
             form.Show();
         }
+
+        private void add_museum_click(object sender, EventArgs e)
+        {
+            Form form = new AddMuseum();
+            form.Show();
+        }
     }
 }
