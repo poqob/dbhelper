@@ -31,7 +31,7 @@ namespace dbhelper
         {
             this.add_material = new System.Windows.Forms.Button();
             this.add_movement = new System.Windows.Forms.Button();
-            this.add_about_artist = new System.Windows.Forms.Button();
+            this.add_adress = new System.Windows.Forms.Button();
             this.add_art = new System.Windows.Forms.Button();
             this.add_artist = new System.Windows.Forms.Button();
             this.button2 = new System.Windows.Forms.Button();
@@ -65,19 +65,19 @@ namespace dbhelper
             this.add_movement.UseVisualStyleBackColor = false;
             this.add_movement.Click += new System.EventHandler(this.add_movement_Click);
             // 
-            // add_about_artist
+            // add_adress
             // 
-            this.add_about_artist.AllowDrop = true;
-            this.add_about_artist.BackColor = System.Drawing.Color.SpringGreen;
-            this.add_about_artist.ForeColor = System.Drawing.Color.Black;
-            this.add_about_artist.Location = new System.Drawing.Point(680, 12);
-            this.add_about_artist.Name = "add_about_artist";
-            this.add_about_artist.Size = new System.Drawing.Size(329, 241);
-            this.add_about_artist.TabIndex = 6;
-            this.add_about_artist.Text = "add about artist";
-            this.add_about_artist.UseCompatibleTextRendering = true;
-            this.add_about_artist.UseVisualStyleBackColor = false;
-            this.add_about_artist.Click += new System.EventHandler(this.add_about_artist_Click);
+            this.add_adress.AllowDrop = true;
+            this.add_adress.BackColor = System.Drawing.Color.SpringGreen;
+            this.add_adress.ForeColor = System.Drawing.Color.Black;
+            this.add_adress.Location = new System.Drawing.Point(680, 12);
+            this.add_adress.Name = "add_adress";
+            this.add_adress.Size = new System.Drawing.Size(329, 241);
+            this.add_adress.TabIndex = 6;
+            this.add_adress.Text = "add adress";
+            this.add_adress.UseCompatibleTextRendering = true;
+            this.add_adress.UseVisualStyleBackColor = false;
+            this.add_adress.Click += new System.EventHandler(this.add_adress_click);
             // 
             // add_art
             // 
@@ -129,7 +129,7 @@ namespace dbhelper
             this.Controls.Add(this.button2);
             this.Controls.Add(this.add_artist);
             this.Controls.Add(this.add_art);
-            this.Controls.Add(this.add_about_artist);
+            this.Controls.Add(this.add_adress);
             this.Controls.Add(this.add_movement);
             this.Controls.Add(this.add_material);
             this.Name = "Form1";
@@ -142,7 +142,7 @@ namespace dbhelper
 
         private System.Windows.Forms.Button add_material;
         private System.Windows.Forms.Button add_movement;
-        private System.Windows.Forms.Button add_about_artist;
+        private System.Windows.Forms.Button add_adress;
         private System.Windows.Forms.Button add_art;
         private System.Windows.Forms.Button add_artist;
         private System.Windows.Forms.Button button2;

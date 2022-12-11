@@ -154,6 +154,7 @@ namespace dbhelper
         //buttons
         private void Add_Click(object sender, EventArgs e)
         {
+            //TODO:formater will be added.
             addRowToTable();
             updateTable();
         }

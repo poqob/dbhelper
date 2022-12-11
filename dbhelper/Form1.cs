@@ -51,10 +51,11 @@ namespace dbhelper
             form.Show();
         }
 
-        private void add_about_artist_Click(object sender, EventArgs e)
+       
+
+        private void add_adress_click(object sender, EventArgs e)
         {
-            //open add movement page.
-            Form form = new AddAboutArtist();
+            Form form = new AddAdress();
             form.Show();
         }
     }

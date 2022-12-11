@@ -94,6 +94,12 @@
     <Reference Include="System.Xml" />
   </ItemGroup>
   <ItemGroup>
+    <Compile Include="AddAdress.cs">
+      <SubType>Form</SubType>
+    </Compile>
+    <Compile Include="AddAdress.Designer.cs">
+      <DependentUpon>AddAdress.cs</DependentUpon>
+    </Compile>
     <Compile Include="AddArt.cs">
       <SubType>Form</SubType>
     </Compile>
@@ -105,6 +111,24 @@
     </Compile>
     <Compile Include="AddArtist.Designer.cs">
       <DependentUpon>AddArtist.cs</DependentUpon>
+    </Compile>
+    <Compile Include="AddCity.cs">
+      <SubType>Form</SubType>
+    </Compile>
+    <Compile Include="AddCity.Designer.cs">
+      <DependentUpon>AddCity.cs</DependentUpon>
+    </Compile>
+    <Compile Include="AddCountry.cs">
+      <SubType>Form</SubType>
+    </Compile>
+    <Compile Include="AddCountry.Designer.cs">
+      <DependentUpon>AddCountry.cs</DependentUpon>
+    </Compile>
+    <Compile Include="AddDistrict.cs">
+      <SubType>Form</SubType>
+    </Compile>
+    <Compile Include="AddDistrict.Designer.cs">
+      <DependentUpon>AddDistrict.cs</DependentUpon>
     </Compile>
     <Compile Include="AddMaterialPage.cs">
       <SubType>Form</SubType>
@@ -127,11 +151,23 @@
     <Compile Include="Iconnection.cs" />
     <Compile Include="Program.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
+    <EmbeddedResource Include="AddAdress.resx">
+      <DependentUpon>AddAdress.cs</DependentUpon>
+    </EmbeddedResource>
     <EmbeddedResource Include="AddArt.resx">
       <DependentUpon>AddArt.cs</DependentUpon>
     </EmbeddedResource>
     <EmbeddedResource Include="AddArtist.resx">
       <DependentUpon>AddArtist.cs</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="AddCity.resx">
+      <DependentUpon>AddCity.cs</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="AddCountry.resx">
+      <DependentUpon>AddCountry.cs</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="AddDistrict.resx">
+      <DependentUpon>AddDistrict.cs</DependentUpon>
     </EmbeddedResource>
     <EmbeddedResource Include="AddMaterialPage.resx">
       <DependentUpon>AddMaterialPage.cs</DependentUpon>
