@@ -1,11 +1,5 @@
 ﻿using System;
-using System.Collections.Generic;
-using System.ComponentModel;
 using System.Data;
-using System.Drawing;
-using System.Linq;
-using System.Text;
-using System.Threading.Tasks;
 using System.Windows.Forms;
 using Npgsql;
 
@@ -83,6 +77,7 @@ namespace dbhelper
             updateTable();
         }
 
+        //delete lastly added row
         public void deleteLastRow()
         {
             bool succesful = true;
@@ -93,7 +88,7 @@ namespace dbhelper
                 int id = Convert.ToInt32(comm.ExecuteScalar());
 
                 //delete lastly added row from about.about and about.about_museum
-                comm.CommandText = "delete from about.about where about.about_id=(max(about_id) from about.about);";
+                comm.CommandText = "delete from about.about where about.about.about_id=(select max(about_id) from about.about);";
                 comm.ExecuteNonQuery();
 
                 // delete last row from museums.museums
@@ -103,12 +98,14 @@ namespace dbhelper
             }
             catch (Exception e)
             {
+                conn.Close();
                 succesful = !succesful;
                 MessageBox.Show(e.Message.ToString());
             }
             MessageBox.Show((succesful) ? "deletion succesfull" : "unsuccesfull");
         }
 
+        //update tables.
         public void updateTable()
         {
             conn.Open();
@@ -122,8 +119,11 @@ namespace dbhelper
                 this.dataGridView1.DataSource = dt;
             }
 
+            comm.CommandText = "create schema if not exists tempp;drop table if exists tempp.newtable; create table  tempp.newtable(country_id, country, city_id, city, district, district_id) as (select adresses.countries.country_id, country, adresses.cities.city_id, city,district,district_id from adresses.countries inner join adresses.cities on adresses.cities.country_id = adresses.countries.country_id inner join adresses.districts on adresses.districts.city_id = adresses.cities.city_id order by country_id); alter table tempp.newtable add column adress_id serial; ";
+            comm.ExecuteNonQuery();
+
             comm.CommandType = CommandType.Text;
-            comm.CommandText = "drop table if exists newtable ;drop table if exists newtable2; create temp table newtable2(adress_id serial); create temp table newtable(country_id, country, city_id, city) as (select adresses.countries.country_id, country, adresses.cities.city_id, city,district from adresses.countries inner join adresses.cities on adresses.cities.country_id = adresses.countries.country_id inner join adresses.districts on adresses.districts.city_id = adresses.cities.city_id order by country_id); alter table newtable add column adress_id serial; select adress_id, country, city,district from newtable; ";
+            comm.CommandText = "select adress_id,country,city,district,district_id from tempp.newtable;";
             dr = comm.ExecuteReader();
             if (dr.HasRows)
             {
@@ -131,12 +131,10 @@ namespace dbhelper
                 dt.Load(dr);
                 this.dataGridView2.DataSource = dt;
             }
-
-
             conn.Close();
         }
 
-        //TODO: how to acces temp tables, learn structure of temp tables.
+        //add data to related tables.
         public void addRowToTable()
         {
 
@@ -153,15 +151,15 @@ namespace dbhelper
                 int id = Convert.ToInt32(comm.ExecuteScalar());
 
                 //obtaining country id
-                comm.CommandText = "select country_id from newtable where adress_id=" + adressID + ";";
+                comm.CommandText = "select country_id from tempp.newtable where adress_id=" + adressID + ";";
                 countryID = comm.ExecuteScalar().ToString();
 
                 //obtaining city id
-                comm.CommandText = "select city_id from newtable where adress_id=" + adressID + ";";
+                comm.CommandText = "select city_id from tempp.newtable where adress_id=" + adressID + ";";
                 cityID = comm.ExecuteScalar().ToString();
 
                 //obtaining district id
-                comm.CommandText = "select district_id from newtable where adress_id=" + adressID + ";";
+                comm.CommandText = "select district_id from tempp.newtable where adress_id=" + adressID + ";";
                 districtID = comm.ExecuteScalar().ToString();
 
                 //insert into about.about_museum
@@ -169,7 +167,7 @@ namespace dbhelper
                 comm.ExecuteNonQuery();
 
                 // insert into museums.museums
-                comm.CommandText = "insert into museums.museums (museum,country_id,city_id,district_id,about_id) values ('" + museum + "'," + countryID + ","+cityID+ "," +districtID+ "," +id+");";
+                comm.CommandText = "insert into museums.museums (museum,country_id,city_id,district_id,about_id) values ('" + museum + "'," + countryID + "," + cityID + "," + districtID + "," + id + ");";
                 comm.ExecuteNonQuery();
                 conn.Close();
             }
@@ -181,7 +179,6 @@ namespace dbhelper
             }
             MessageBox.Show((succesful) ? "addition succesfull" : "unsuccesfull");
         }
-
 
         //format method
         private void formater(ref string a)
@@ -203,7 +200,6 @@ namespace dbhelper
                 }
             }
         }
-
 
     }
 }
