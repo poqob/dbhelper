@@ -1,11 +1,5 @@
 ﻿using System;
-using System.Collections.Generic;
-using System.ComponentModel;
 using System.Data;
-using System.Drawing;
-using System.Linq;
-using System.Text;
-using System.Threading.Tasks;
 using System.Windows.Forms;
 using Npgsql;
 
@@ -164,8 +158,8 @@ namespace dbhelper
         private void button1_Click(object sender, EventArgs e)
         {
             //insert into movement.movement table the text
-            formater(ref aboutname);
-            formater(ref abouttext);
+            TextFormatter.formater(ref aboutname);
+            TextFormatter.formater(ref abouttext);
             addRowToTable();
             updateTable();
         }
@@ -198,26 +192,6 @@ namespace dbhelper
         private void abouttextbox_TextChanged(object sender, EventArgs e)
         {
             abouttext = abouttextbox.Text;
-        }
-
-        private void formater(ref string a)
-        {
-            //we will write a string formatter here to avoid ' character error for sql solver.
-            //example: john's villa. if we send it to sql engine the engine will fall in a conflict.
-            int loc = 0;
-            int counter = 0;
-
-
-            if (a.Contains("'"))
-            {
-                while (loc != -1 || counter != a.Length)
-                {
-                    loc = a.IndexOf("'", loc);
-                    a.Insert(loc, "'");
-                    loc++;
-                    counter++;
-                }
-            }
         }
     }
 }

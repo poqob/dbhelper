@@ -33,7 +33,7 @@ namespace dbhelper
         private void add_Click(object sender, EventArgs e)
         {
             //add row to db
-            formater(ref city);
+            TextFormatter.formater(ref city);
             addRowToTable();
             updateTable();
             
@@ -126,29 +126,6 @@ namespace dbhelper
                 conn.Close();
             }
             MessageBox.Show((succesful) ? "addition succesfull" : "unsuccesfull");
-        }
-
-
-
-        //format method
-        private void formater(ref string a)
-        {
-            //we will write a string formatter here to avoid ' character error for sql solver.
-            //example: john's villa. if we send it to sql engine the engine will fall in a conflict.
-            int loc = 0;
-            int counter = 0;
-
-
-            if (a.Contains("'"))
-            {
-                while (loc != -1 || counter != a.Length)
-                {
-                    loc = a.IndexOf("'", loc);
-                    a.Insert(loc, "'");
-                    loc++;
-                    counter++;
-                }
-            }
         }
     }
 }

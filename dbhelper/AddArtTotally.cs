@@ -106,12 +106,13 @@ namespace dbhelper
                 comm.CommandText = "(select max(art_id) from arts.art);";
                 int artid = Convert.ToInt32(comm.ExecuteScalar());
 
+
                 //delete lastly added row from about.about and about.about_art
                 comm.CommandText = "delete from about.about where about.about.about_id="+aboutid+";";
                 comm.ExecuteNonQuery();
 
                 //delete lastly added row from arts.art and arts.art_$catagory
-                comm.CommandText = "delete from arts.art where arts.art_id=" + artid + ";";
+                comm.CommandText = "delete from arts.art where arts.art.art_id=" + artid + ";";
                 comm.ExecuteNonQuery();
                 conn.Close();
             }
@@ -178,6 +179,8 @@ namespace dbhelper
 
         public void addRowToTable()
         {
+
+            TextFormatter.formater(ref abouttext);
             bool succesful = true;
             try
             {
@@ -206,7 +209,7 @@ namespace dbhelper
                 //TODO: tarih kismi yapılacak.
 
                 //insert into related catagory art table.
-                comm.CommandText = "insert into arts." + catagoryname + " (art_id,art_artist_id,art_material_id,art_movement_id,art_about_id,art_date) values (" + artid + "," + artistID + "," + materialID + "," + movementID + "," + aboutid + "," + year + ");";
+                comm.CommandText = "insert into arts." + catagoryname + " (art_id,art_artist_id,art_material_id,art_movement_id,art_about_id,art_year) values (" + artid + "," + artistID + "," + materialID + "," + movementID + "," + aboutid + ",'" + year + "/01/01');";
                 comm.ExecuteNonQuery();
                 conn.Close();
             }
@@ -218,29 +221,5 @@ namespace dbhelper
             }
             MessageBox.Show((succesful) ? "addition succesfull" : "unsuccesfull");
         }
-
-
-        //format method
-        private void formater(ref string a)
-        {
-            //we will write a string formatter here to avoid ' character error for sql solver.
-            //example: john's villa. if we send it to sql engine the engine will fall in a conflict.
-            int loc = 0;
-            int counter = 0;
-
-
-            if (a.Contains("'"))
-            {
-                while (loc != -1 || counter != a.Length)
-                {
-                    loc = a.IndexOf("'", loc);
-                    a.Insert(loc, "'");
-                    loc++;
-                    counter++;
-                }
-            }
-        }
-
-
     }
 }
