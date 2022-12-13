@@ -1,13 +1,5 @@
 ﻿using System;
-using System.Collections.Generic;
-using System.ComponentModel;
-using System.Data;
-using System.Drawing;
-using System.Linq;
-using System.Text;
-using System.Threading.Tasks;
 using System.Windows.Forms;
-using Npgsql;
 
 namespace dbhelper
 {
@@ -15,20 +7,8 @@ namespace dbhelper
     {
         public Form1()
         {
-
             InitializeComponent();
-           
-
         }
-
-        private void add__Click(object sender, EventArgs e)
-        {
-
-        }
-
-       
-
-
 
         private void add_movement_Click(object sender, EventArgs e)
         {
@@ -47,21 +27,29 @@ namespace dbhelper
 
         private void add_material_Click(object sender, EventArgs e)
         {
+            //adding material page
             Form form = new AddMaterialPage();
             form.Show();
         }
 
-       
-
         private void add_adress_click(object sender, EventArgs e)
         {
+            //add adress page
             Form form = new AddAdress();
             form.Show();
         }
 
         private void add_museum_click(object sender, EventArgs e)
         {
+            //add museum page
             Form form = new AddMuseum();
+            form.Show();
+        }
+
+        private void add_art_Click(object sender, EventArgs e)
+        {
+            //add museum page
+            Form form = new AddArtRoute();
             form.Show();
         }
     }

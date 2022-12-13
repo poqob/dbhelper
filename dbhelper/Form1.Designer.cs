@@ -91,7 +91,7 @@ namespace dbhelper
             this.add_art.Text = "Add Art";
             this.add_art.UseCompatibleTextRendering = true;
             this.add_art.UseVisualStyleBackColor = false;
-            this.add_art.Click += new System.EventHandler(this.add__Click);
+            this.add_art.Click += new System.EventHandler(this.add_art_Click);
             // 
             // add_artist
             // 

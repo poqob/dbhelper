@@ -112,6 +112,18 @@
     <Compile Include="AddArtist.Designer.cs">
       <DependentUpon>AddArtist.cs</DependentUpon>
     </Compile>
+    <Compile Include="AddArtRoute.cs">
+      <SubType>Form</SubType>
+    </Compile>
+    <Compile Include="AddArtRoute.Designer.cs">
+      <DependentUpon>AddArtRoute.cs</DependentUpon>
+    </Compile>
+    <Compile Include="AddArtTotally.cs">
+      <SubType>Form</SubType>
+    </Compile>
+    <Compile Include="AddArtTotally.Designer.cs">
+      <DependentUpon>AddArtTotally.cs</DependentUpon>
+    </Compile>
     <Compile Include="AddCity.cs">
       <SubType>Form</SubType>
     </Compile>
@@ -165,6 +177,12 @@
     </EmbeddedResource>
     <EmbeddedResource Include="AddArtist.resx">
       <DependentUpon>AddArtist.cs</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="AddArtRoute.resx">
+      <DependentUpon>AddArtRoute.cs</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="AddArtTotally.resx">
+      <DependentUpon>AddArtTotally.cs</DependentUpon>
     </EmbeddedResource>
     <EmbeddedResource Include="AddCity.resx">
       <DependentUpon>AddCity.cs</DependentUpon>
