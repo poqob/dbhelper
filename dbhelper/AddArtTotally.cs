@@ -164,7 +164,7 @@ namespace dbhelper
             conn.Open();
 
 
-            //about tablosundaki david silinecek about art tablosu cascade değil !!!
+           
             comm.CommandText = "select * from  material.material";
             dr = comm.ExecuteReader();
             if (dr.HasRows)
@@ -195,13 +195,15 @@ namespace dbhelper
                 comm.ExecuteNonQuery();
 
                 // insert into arts.art with catagory
-                comm.CommandText = "insert into arts.art (art_name,art_type) values ('" + artname + "'," + catagory + ");";
+                comm.CommandText = "insert into arts.art (art_name,art_type) values ('" + artname + "','" + catagory + "');";
                 comm.ExecuteNonQuery();
 
 
                 //obtaining lastly added input id from arts.art
                 comm.CommandText = "(select max(art_id) from arts.art);";
                 int artid = Convert.ToInt32(comm.ExecuteScalar());
+
+                //TODO: tarih kismi yapılacak.
 
                 //insert into related catagory art table.
                 comm.CommandText = "insert into arts." + catagoryname + " (art_id,art_artist_id,art_material_id,art_movement_id,art_about_id,art_date) values (" + artid + "," + artistID + "," + materialID + "," + movementID + "," + aboutid + "," + year + ");";
