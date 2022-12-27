@@ -37,6 +37,7 @@ namespace dbhelper
             this.button2 = new System.Windows.Forms.Button();
             this.userLogIn = new System.Windows.Forms.Button();
             this.SignIn = new System.Windows.Forms.Button();
+            this.exit = new System.Windows.Forms.Button();
             this.SuspendLayout();
             // 
             // add_material
@@ -151,12 +152,27 @@ namespace dbhelper
             this.SignIn.UseVisualStyleBackColor = false;
             this.SignIn.Click += new System.EventHandler(this.SignIn_Click);
             // 
+            // exit
+            // 
+            this.exit.AllowDrop = true;
+            this.exit.BackColor = System.Drawing.Color.SpringGreen;
+            this.exit.ForeColor = System.Drawing.Color.Black;
+            this.exit.Location = new System.Drawing.Point(680, 527);
+            this.exit.Name = "exit";
+            this.exit.Size = new System.Drawing.Size(329, 241);
+            this.exit.TabIndex = 12;
+            this.exit.Text = "Quit";
+            this.exit.UseCompatibleTextRendering = true;
+            this.exit.UseVisualStyleBackColor = false;
+            this.exit.Click += new System.EventHandler(this.exit_Click);
+            // 
             // Form1
             // 
             this.AutoScaleDimensions = new System.Drawing.SizeF(8F, 16F);
             this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font;
             this.BackColor = System.Drawing.Color.Green;
             this.ClientSize = new System.Drawing.Size(1017, 778);
+            this.Controls.Add(this.exit);
             this.Controls.Add(this.SignIn);
             this.Controls.Add(this.userLogIn);
             this.Controls.Add(this.button2);
@@ -181,6 +197,7 @@ namespace dbhelper
         private System.Windows.Forms.Button button2;
         private System.Windows.Forms.Button userLogIn;
         private System.Windows.Forms.Button SignIn;
+        private System.Windows.Forms.Button exit;
     }
 }
 

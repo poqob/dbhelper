@@ -67,5 +67,10 @@ namespace dbhelper
             this.Dispose();
 
         }
+
+        private void post_Click(object sender, EventArgs e)
+        {
+
+        }
     }
 }

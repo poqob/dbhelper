@@ -65,5 +65,10 @@ namespace dbhelper
             Form form = new SignIn();
             form.Show();
         }
+
+        private void exit_Click(object sender, EventArgs e)
+        {
+            this.Dispose();
+        }
     }
 }

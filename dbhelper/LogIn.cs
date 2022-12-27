@@ -61,6 +61,7 @@ namespace dbhelper
             {
                 if (dr[0].ToString() == "True")
                 {
+                    MessageBox.Show("user found, welcome");
                     result.Text = "succesfully logged in";
                     this.Hide();
                     Form form = new UserPanel(_username, _password);
