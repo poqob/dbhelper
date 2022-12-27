@@ -52,5 +52,18 @@ namespace dbhelper
             Form form = new AddArtRoute();
             form.Show();
         }
+
+        private void users_Click(object sender, EventArgs e)
+        {
+            //open user manager panel
+            Form form = new LogIn();
+            form.Show();
+        }
+
+        private void SignIn_Click(object sender, EventArgs e)
+        {
+            Form form = new SignIn();
+            form.Show();
+        }
     }
 }

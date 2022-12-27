@@ -179,14 +179,13 @@ namespace dbhelper
 
         public void addRowToTable()
         {
-
             TextFormatter.formater(ref abouttext);
             bool succesful = true;
             try
             {
                 conn.Open();
                 // insert into about.about
-                comm.CommandText = "insert into about.about (about_name,about_who) values ('" + artname + "','a');";
+                comm.CommandText = "BEGIN; insert into about.about (about_name,about_who) values ('" + artname + "','a'); COMMIT;";
                 comm.ExecuteNonQuery();
 
                 //obtaining lastly added input id from about.about
@@ -194,11 +193,11 @@ namespace dbhelper
                 int aboutid = Convert.ToInt32(comm.ExecuteScalar());
 
                 //insert into about.about_art
-                comm.CommandText = "insert into about.about_art (about_id,about_text,about_img) values (" + aboutid + ",'" + abouttext + "','" + aboutimg + "');";
+                comm.CommandText = "BEGIN;insert into about.about_art (about_id,about_text,about_img) values (" + aboutid + ",'" + abouttext + "','" + aboutimg + "'); COMMIT;";
                 comm.ExecuteNonQuery();
 
                 // insert into arts.art with catagory
-                comm.CommandText = "insert into arts.art (art_name,art_type) values ('" + artname + "','" + catagory + "');";
+                comm.CommandText = "BEGIN;insert into arts.art (art_name,art_type) values ('" + artname + "','" + catagory + "'); COMMIT;";
                 comm.ExecuteNonQuery();
 
 
@@ -209,7 +208,7 @@ namespace dbhelper
                 //TODO: tarih kismi yapılacak.
 
                 //insert into related catagory art table.
-                comm.CommandText = "insert into arts." + catagoryname + " (art_id,art_artist_id,art_material_id,art_movement_id,art_about_id,art_year) values (" + artid + "," + artistID + "," + materialID + "," + movementID + "," + aboutid + ",'" + year + "/01/01');";
+                comm.CommandText = "BEGIN;insert into arts." + catagoryname + " (art_id,art_artist_id,art_material_id,art_movement_id,art_about_id,art_date) values (" + artid + "," + artistID + "," + materialID + "," + movementID + "," + aboutid + ",'" + year + "/01/01'); COMMIT;";
                 comm.ExecuteNonQuery();
                 conn.Close();
             }

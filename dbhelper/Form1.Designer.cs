@@ -35,6 +35,8 @@ namespace dbhelper
             this.add_art = new System.Windows.Forms.Button();
             this.add_artist = new System.Windows.Forms.Button();
             this.button2 = new System.Windows.Forms.Button();
+            this.userLogIn = new System.Windows.Forms.Button();
+            this.SignIn = new System.Windows.Forms.Button();
             this.SuspendLayout();
             // 
             // add_material
@@ -121,12 +123,42 @@ namespace dbhelper
             this.button2.UseVisualStyleBackColor = false;
             this.button2.Click += new System.EventHandler(this.add_museum_click);
             // 
+            // userLogIn
+            // 
+            this.userLogIn.AllowDrop = true;
+            this.userLogIn.BackColor = System.Drawing.Color.SpringGreen;
+            this.userLogIn.ForeColor = System.Drawing.Color.Black;
+            this.userLogIn.Location = new System.Drawing.Point(10, 527);
+            this.userLogIn.Name = "userLogIn";
+            this.userLogIn.Size = new System.Drawing.Size(329, 241);
+            this.userLogIn.TabIndex = 10;
+            this.userLogIn.Text = "User LogIn";
+            this.userLogIn.UseCompatibleTextRendering = true;
+            this.userLogIn.UseVisualStyleBackColor = false;
+            this.userLogIn.Click += new System.EventHandler(this.users_Click);
+            // 
+            // SignIn
+            // 
+            this.SignIn.AllowDrop = true;
+            this.SignIn.BackColor = System.Drawing.Color.SpringGreen;
+            this.SignIn.ForeColor = System.Drawing.Color.Black;
+            this.SignIn.Location = new System.Drawing.Point(345, 527);
+            this.SignIn.Name = "SignIn";
+            this.SignIn.Size = new System.Drawing.Size(329, 241);
+            this.SignIn.TabIndex = 11;
+            this.SignIn.Text = "User SignIn";
+            this.SignIn.UseCompatibleTextRendering = true;
+            this.SignIn.UseVisualStyleBackColor = false;
+            this.SignIn.Click += new System.EventHandler(this.SignIn_Click);
+            // 
             // Form1
             // 
             this.AutoScaleDimensions = new System.Drawing.SizeF(8F, 16F);
             this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font;
             this.BackColor = System.Drawing.Color.Green;
-            this.ClientSize = new System.Drawing.Size(1017, 526);
+            this.ClientSize = new System.Drawing.Size(1017, 778);
+            this.Controls.Add(this.SignIn);
+            this.Controls.Add(this.userLogIn);
             this.Controls.Add(this.button2);
             this.Controls.Add(this.add_artist);
             this.Controls.Add(this.add_art);
@@ -147,6 +179,8 @@ namespace dbhelper
         private System.Windows.Forms.Button add_art;
         private System.Windows.Forms.Button add_artist;
         private System.Windows.Forms.Button button2;
+        private System.Windows.Forms.Button userLogIn;
+        private System.Windows.Forms.Button SignIn;
     }
 }
 
